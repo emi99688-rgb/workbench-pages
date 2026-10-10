@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.08.2";
+const APP_VER = "2026.10.10.1";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1136,6 +1136,8 @@ const ICON_OVERRIDES = {
   "Spoga+Gafa 科隆户外园艺展": "assets/logos/Spoga+Gafa 科隆户外园艺展.png",
   "GITEX Global 迪拜电子展": "assets/logos/GITEX Global 迪拜电子展.png",
   "卖家精灵": "assets/logos/卖家精灵.png",
+  "Garden类目总榜": "assets/logos/Garden类目总榜.png",
+  "家居改善类目总榜": "assets/logos/家居改善类目总榜.png",
   "即梦": "assets/logos/即梦.png",
   "Midjourney": "assets/logos/Midjourney.png",
   "Pinterest": "assets/logos/Pinterest.png",
@@ -1733,7 +1735,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 13;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 14;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 function saveModules(pageId, modules){
   const all = load(MODS_KEY, {});
@@ -1761,6 +1763,10 @@ function defaultModules(pageId){
     ] },
     { id:"m_product_2", title:"工具链接", collapsed:false, links:[
       { id:"l_product_2_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
+    ] },
+    { id:"m_product_3", title:"潜力类目", collapsed:false, links:[
+      { id:"l_product_3_0", name:"Garden类目总榜", url:"https://www.amazon.com/gp/bestsellers/lawn-garden", visits:0 },
+      { id:"l_product_3_1", name:"家居改善类目总榜", url:"https://www.amazon.com/gp/bestsellers/hi/ref=pd_zg_ts_hi", visits:0 },
     ] },
   ],
   visual: [
