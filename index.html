@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.10.1";
+const APP_VER = "2026.10.10.2";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1164,6 +1164,7 @@ const ICON_OVERRIDES = {
   "补货建议看板": "assets/logos/补货建议看板.png",
   "畅飞物流": "assets/logos/畅飞物流.png",
   "货件跟踪": "assets/logos/货件跟踪.png",
+  "纳百万物流": "assets/logos/纳百万物流.png",
   "PingPong": "assets/logos/PingPong.png",
   "万里汇": "assets/logos/万里汇.png",
   "聚水潭": "assets/logos/聚水潭.png",
@@ -1735,7 +1736,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 14;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 15;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 function saveModules(pageId, modules){
   const all = load(MODS_KEY, {});
@@ -1815,6 +1816,7 @@ function defaultModules(pageId){
       { id:"l_ops_2_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
       { id:"l_ops_2_12", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
       { id:"l_ops_2_13", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_2_14", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
     ] },
   ],
   erp: [
