@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.10.2";
+const APP_VER = "2026.10.13.1";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1736,7 +1736,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 15;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 16;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 function saveModules(pageId, modules){
   const all = load(MODS_KEY, {});
@@ -1838,7 +1838,7 @@ function defaultModules(pageId){
   ],
   news: [
     { id:"m_news_0", title:"AI资讯", collapsed:false, links:[
-      { id:"l_news_0_0", name:"AIhot", url:"https://aihot.virxact.com/daily", visits:0 },
+      { id:"l_news_0_0", name:"AIhot", url:"https://aihot.news/daily", visits:0 },
     ] },
     { id:"m_news_1", title:"跨境资讯", collapsed:false, links:[
       { id:"l_news_1_0", name:"雨果网", url:"https://www.cifnews.com/", visits:0 },
