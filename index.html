@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.20.1";
+const APP_VER = "2026.10.20.2";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1227,9 +1227,12 @@ function createIcon(name, url, cls, pageId){
     const img = document.createElement("img");
     img.alt = "";
     img.decoding = "async";
-    img.loading = "lazy";
+    img.loading = "eager";
+    img.fetchPriority = "high";
+    img.width = 56;
+    img.height = 56;
     img.onerror = function(){
-      /* 原站 favicon.ico 失败 → 回退 Google（国际源，国内可能不稳）→ 首字母 */
+      /* 本地图标失败 → 回退 Google（国际源，国内可能不稳）→ 首字母 */
       if(!img.dataset.tried){
         img.dataset.tried = "1";
         const dm = domainFromUrl(url);
@@ -1274,7 +1277,7 @@ function createIcon(name, url, cls, pageId){
   const img = document.createElement("img");
   img.alt = "";
   img.decoding = "async";
-  img.loading = "lazy";
+  img.loading = "eager";
   let idx = 0;
   img.onerror = function(){
     idx++;
