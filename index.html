@@ -838,7 +838,7 @@
           <button class="m-btn ghost" id="btnExport" type="button" title="下载全部配置为 JSON 文件">导出备份</button>
           <button class="m-btn ghost" id="btnImport" type="button" title="从备份文件恢复配置">导入恢复</button>
         </div>
-        <div class="sd-note">导出可<b>备份 82 条链接</b>与主题/排序；换设备或清缓存后用「导入恢复」一键还原。</div>
+        <div class="sd-note">导出可<b>备份 <span id="sdLinkCount">0</span> 条链接</b>与主题/排序；换设备或清缓存后用「导入恢复」一键还原。</div>
         <input type="file" id="importFile" accept="application/json,.json" hidden />
       </div>
       <div class="side-foot" data-page-node-id="sf1">
@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.28.1";
+const APP_VER = "2026.10.28.2";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1750,10 +1750,17 @@ function modCommon(root){
 const MODS_KEY = "wb_modules";
 const MODS_VER = 20;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
+/* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
+function updateLinkCounters(){
+  const n = allLinksCount();
+  const foot = $("footLinks"); if(foot) foot.textContent = n;
+  const note = $("sdLinkCount"); if(note) note.textContent = n;
+}
 function saveModules(pageId, modules){
   const all = load(MODS_KEY, {});
   all[pageId] = { v: MODS_VER, modules };
   save(MODS_KEY, all);
+  updateLinkCounters();
 }
 function defaultModules(pageId){
   const p = pageId;
@@ -2653,6 +2660,7 @@ function aiAddLink(name, url){
   renderMenu();
   if(activeId === c.id) renderDetail();
   const foot = $("footLinks"); if(foot) foot.textContent = allLinksCount();
+  updateLinkCounters();
   return { cat:c, mod:mod };
 }
 function aiStats(){
@@ -2938,6 +2946,7 @@ if(gSearch){
 }
 const footLinksEl = $("footLinks");
 if(footLinksEl) footLinksEl.textContent = allLinksCount();
+updateLinkCounters();
 
 /* 版本戳显示 + 手动强制刷新 + 自动检测新版本 */
 const appVerEl = $("appVer");
