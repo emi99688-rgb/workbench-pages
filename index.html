@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.29.2";
+const APP_VER = "2026.10.29.3";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1124,6 +1124,7 @@ function domainFromUrl(url){
    优先于 DuckDuckGo/Google/原站 favicon 抓取，加新图标只需：把 png/svg 丢到 assets/，在此注册一行。
    例：{ "卖家精灵": "assets/sellersprite.png" } */
 const ICON_OVERRIDES = {
+  "西柚新爆品": "assets/logos/西柚新爆品.jpg",
   "灯大类新品榜": "assets/logos/灯大类新品榜.jpg",
   "户外灯具新品榜": "assets/logos/户外灯具新品榜.jpg",
   "家居大类新品榜": "assets/logos/家居大类新品榜.jpg",
@@ -1749,7 +1750,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 22;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 23;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1767,58 +1768,61 @@ function defaultModules(pageId){
   const p = pageId;
   const all = {
   product: [
-    { id:"m_product_0", title:"新品榜", collapsed:false, links:[
-      { id:"l_product_0_0", name:"灯大类新品榜", url:"https://www.amazon.com/gp/new-releases/hi/495224/ref=zg_bsnr_nav_hi_1", visits:0 },
-      { id:"l_product_0_1", name:"户外灯具新品榜", url:"https://www.amazon.com/gp/new-releases/hi/495236/ref=zg_bsnr_nav_hi_2_495224", visits:0 },
-      { id:"l_product_0_2", name:"家居大类新品榜", url:"https://www.amazon.com/gp/new-releases/hi/ref=zg_bsnr_unv_hi_1_495236_2", visits:0 },
+    { id:"m_product_0", title:"潜力新爆品", collapsed:false, links:[
+      { id:"l_product_0_0", name:"西柚新爆品", url:"https://www.xydc.com/detail/product_radar?xiyou-insights-web=%2Fproduct-radar%2Fhot-ranking%2FUS%3FhotRankingFilters%3D%255B%257B%2522type%2522%253A%2522custom%2522%252C%2522field%2522%253A%2522categoryIds%2522%252C%2522value%2522%253A%255B%257B%2522categoryId%2522%253A%2522us_202609_9P_pcwqcp%2522%252C%2522categoryName%2522%253A%2522%25E7%2585%25A7%25E6%2598%258E%2528Lighting%2529%2522%257D%255D%257D%255D", visits:0 },
     ] },
-    { id:"m_product_1", title:"销量总榜", collapsed:false, links:[
-      { id:"l_product_1_0", name:"灯大类销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement-Lighting-Ceiling-Fans/zgbs/hi/495224/ref=zg_bs_nav_hi_1", visits:0 },
-      { id:"l_product_1_1", name:"户外灯具销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement-Outdoor-Lighting-Products/zgbs/hi/495236/ref=zg_bs_nav_hi_2_495224", visits:0 },
-      { id:"l_product_1_2", name:"家居大类销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement/zgbs/hi/ref=zg_bs_nav_hi_0", visits:0 },
+    { id:"m_product_1", title:"新品榜", collapsed:false, links:[
+      { id:"l_product_1_0", name:"灯大类新品榜", url:"https://www.amazon.com/gp/new-releases/hi/495224/ref=zg_bsnr_nav_hi_1", visits:0 },
+      { id:"l_product_1_1", name:"户外灯具新品榜", url:"https://www.amazon.com/gp/new-releases/hi/495236/ref=zg_bsnr_nav_hi_2_495224", visits:0 },
+      { id:"l_product_1_2", name:"家居大类新品榜", url:"https://www.amazon.com/gp/new-releases/hi/ref=zg_bsnr_unv_hi_1_495236_2", visits:0 },
     ] },
-    { id:"m_product_2", title:"品类BSR榜", collapsed:false, links:[
-      { id:"l_product_2_0", name:"商业照明", url:"https://www.amazon.com/gp/bestsellers/hi/5772200011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_product_2_1", name:"泛光灯", url:"https://www.amazon.com/gp/bestsellers/hi/495238/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_product_2_2", name:"甲板灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486437011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_product_2_3", name:"台阶灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486439011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_product_2_4", name:"壁灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486443011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_product_2_5", name:"房车外部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439429011/ref=pd_zg_hrsr_automotive", visits:0 },
-      { id:"l_product_2_6", name:"房车内部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439431011/ref=pd_zg_hrsr_automotive", visits:0 },
-      { id:"l_product_2_7", name:"地插灯", url:"https://www.amazon.com/gp/bestsellers/hi/14193171/ref=pd_zg_hrsr_hi", visits:0 },
+    { id:"m_product_2", title:"销量总榜", collapsed:false, links:[
+      { id:"l_product_2_0", name:"灯大类销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement-Lighting-Ceiling-Fans/zgbs/hi/495224/ref=zg_bs_nav_hi_1", visits:0 },
+      { id:"l_product_2_1", name:"户外灯具销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement-Outdoor-Lighting-Products/zgbs/hi/495236/ref=zg_bs_nav_hi_2_495224", visits:0 },
+      { id:"l_product_2_2", name:"家居大类销量榜", url:"https://www.amazon.com/Best-Sellers-Tools-Home-Improvement/zgbs/hi/ref=zg_bs_nav_hi_0", visits:0 },
     ] },
-    { id:"m_product_3", title:"品类秒杀榜", collapsed:false, links:[
-      { id:"l_product_3_0", name:"商业照明", url:"https://www.amazon.com/b?node=5772200011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_1", name:"泛光灯", url:"https://www.amazon.com/b?node=495238&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_2", name:"甲板灯", url:"https://www.amazon.com/b?node=5486437011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_3", name:"台阶灯", url:"https://www.amazon.com/b?node=5486439011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_4", name:"壁灯", url:"https://www.amazon.com/b?node=5486443011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_5", name:"房车外部照明", url:"https://www.amazon.com/b?node=11439429011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_product_3_6", name:"房车内部照明", url:"https://www.amazon.com/b?node=11439431011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+    { id:"m_product_3", title:"品类BSR榜", collapsed:false, links:[
+      { id:"l_product_3_0", name:"商业照明", url:"https://www.amazon.com/gp/bestsellers/hi/5772200011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_product_3_1", name:"泛光灯", url:"https://www.amazon.com/gp/bestsellers/hi/495238/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_product_3_2", name:"甲板灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486437011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_product_3_3", name:"台阶灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486439011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_product_3_4", name:"壁灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486443011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_product_3_5", name:"房车外部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439429011/ref=pd_zg_hrsr_automotive", visits:0 },
+      { id:"l_product_3_6", name:"房车内部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439431011/ref=pd_zg_hrsr_automotive", visits:0 },
+      { id:"l_product_3_7", name:"地插灯", url:"https://www.amazon.com/gp/bestsellers/hi/14193171/ref=pd_zg_hrsr_hi", visits:0 },
     ] },
-    { id:"m_product_4", title:"展会平台", collapsed:false, links:[
-      { id:"l_product_4_0", name:"RX 励展集团", url:"https://www.reedexhibitions.com", visits:0 },
-      { id:"l_product_4_1", name:"法兰克福展览", url:"https://www.messefrankfurt.com", visits:0 },
+    { id:"m_product_4", title:"品类秒杀榜", collapsed:false, links:[
+      { id:"l_product_4_0", name:"商业照明", url:"https://www.amazon.com/b?node=5772200011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_1", name:"泛光灯", url:"https://www.amazon.com/b?node=495238&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_2", name:"甲板灯", url:"https://www.amazon.com/b?node=5486437011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_3", name:"台阶灯", url:"https://www.amazon.com/b?node=5486439011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_4", name:"壁灯", url:"https://www.amazon.com/b?node=5486443011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_5", name:"房车外部照明", url:"https://www.amazon.com/b?node=11439429011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_product_4_6", name:"房车内部照明", url:"https://www.amazon.com/b?node=11439431011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
     ] },
-    { id:"m_product_5", title:"展会网址", collapsed:false, links:[
-      { id:"l_product_5_0", name:"CCEF 广州跨交会", url:"http://www.gzccef.com", visits:0 },
-      { id:"l_product_5_1", name:"ICBE 深圳跨交会", url:"https://www.icbeexpo.com", visits:0 },
-      { id:"l_product_5_2", name:"广交会", url:"https://www.cantonfair.org.cn", visits:0 },
-      { id:"l_product_5_3", name:"环球资源香港展", url:"https://www.globalsources.com", visits:0 },
-      { id:"l_product_5_4", name:"HKTDC礼品家居展", url:"https://www.hktdc.com", visits:0 },
-      { id:"l_product_5_5", name:"CES电子展", url:"https://www.ces.tech", visits:0 },
-      { id:"l_product_5_6", name:"IFA 德国柏林电子展", url:"https://www.ifa-berlin.com", visits:0 },
-      { id:"l_product_5_7", name:"Spoga+Gafa 科隆户外园艺展", url:"https://www.spoga-gafa.com", visits:0 },
-      { id:"l_product_5_8", name:"GITEX Global 迪拜电子展", url:"https://www.gitex.com", visits:0 },
+    { id:"m_product_5", title:"展会平台", collapsed:false, links:[
+      { id:"l_product_5_0", name:"RX 励展集团", url:"https://www.reedexhibitions.com", visits:0 },
+      { id:"l_product_5_1", name:"法兰克福展览", url:"https://www.messefrankfurt.com", visits:0 },
     ] },
-    { id:"m_product_6", title:"工具链接", collapsed:false, links:[
-      { id:"l_product_6_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
-      { id:"l_product_6_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
-      { id:"l_product_6_2", name:"SIF", url:"https://www.sif.com/", visits:0 },
+    { id:"m_product_6", title:"展会网址", collapsed:false, links:[
+      { id:"l_product_6_0", name:"CCEF 广州跨交会", url:"http://www.gzccef.com", visits:0 },
+      { id:"l_product_6_1", name:"ICBE 深圳跨交会", url:"https://www.icbeexpo.com", visits:0 },
+      { id:"l_product_6_2", name:"广交会", url:"https://www.cantonfair.org.cn", visits:0 },
+      { id:"l_product_6_3", name:"环球资源香港展", url:"https://www.globalsources.com", visits:0 },
+      { id:"l_product_6_4", name:"HKTDC礼品家居展", url:"https://www.hktdc.com", visits:0 },
+      { id:"l_product_6_5", name:"CES电子展", url:"https://www.ces.tech", visits:0 },
+      { id:"l_product_6_6", name:"IFA 德国柏林电子展", url:"https://www.ifa-berlin.com", visits:0 },
+      { id:"l_product_6_7", name:"Spoga+Gafa 科隆户外园艺展", url:"https://www.spoga-gafa.com", visits:0 },
+      { id:"l_product_6_8", name:"GITEX Global 迪拜电子展", url:"https://www.gitex.com", visits:0 },
     ] },
-    { id:"m_product_7", title:"潜力类目", collapsed:false, links:[
-      { id:"l_product_7_0", name:"Garden类目总榜", url:"https://www.amazon.com/gp/bestsellers/lawn-garden", visits:0 },
-      { id:"l_product_7_1", name:"家居改善类目总榜", url:"https://www.amazon.com/gp/bestsellers/hi/ref=pd_zg_ts_hi", visits:0 },
+    { id:"m_product_7", title:"工具链接", collapsed:false, links:[
+      { id:"l_product_7_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
+      { id:"l_product_7_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
+      { id:"l_product_7_2", name:"SIF", url:"https://www.sif.com/", visits:0 },
+    ] },
+    { id:"m_product_8", title:"潜力类目", collapsed:false, links:[
+      { id:"l_product_8_0", name:"Garden类目总榜", url:"https://www.amazon.com/gp/bestsellers/lawn-garden", visits:0 },
+      { id:"l_product_8_1", name:"家居改善类目总榜", url:"https://www.amazon.com/gp/bestsellers/hi/ref=pd_zg_ts_hi", visits:0 },
     ] },
   ],
   visual: [
