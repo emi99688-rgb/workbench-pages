@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.10.30.1";
+const APP_VER = "2026.10.30.2";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1187,6 +1187,7 @@ const ICON_OVERRIDES = {
   "亿恩网": "assets/logos/亿恩网.png",
   "海关总署": "assets/logos/海关总署.png",
   "Digital Commerce 360": "assets/logos/Digital Commerce 360.png",
+  "Reddit": "assets/logos/Reddit.png",
   "人民网": "assets/logos/人民网.png",
   "新华网": "assets/logos/新华网.png",
   "央视网": "assets/logos/央视网.png",
@@ -1751,7 +1752,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 24;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 25;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1910,6 +1911,7 @@ function defaultModules(pageId){
     ] },
     { id:"m_news_3", title:"北美动态", collapsed:false, links:[
       { id:"l_news_3_0", name:"Digital Commerce 360", url:"https://www.digitalcommerce360.com/", visits:0 },
+      { id:"l_news_3_1", name:"Reddit", url:"https://www.reddit.com/", visits:0 },
     ] },
     { id:"m_news_4", title:"时政要闻", collapsed:false, links:[
       { id:"l_news_4_0", name:"人民网", url:"https://www.people.com.cn", visits:0 },
