@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.04.1";
+const APP_VER = "2026.11.05.1";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1168,6 +1168,9 @@ const ICON_OVERRIDES = {
   "Pexels": "assets/logos/Pexels.png",
   "Unsplash": "assets/logos/Unsplash.png",
   "花瓣网": "assets/logos/花瓣网.png",
+  "Tiktok": "assets/logos/Tiktok.png",
+  "Youtube": "assets/logos/Youtube.png",
+  "Instagram": "assets/logos/Instagram.png",
   "八面马": "assets/logos/八面马.png",
   "优麦云": "assets/logos/优麦云.png",
   "AMZ123": "assets/logos/AMZ123.png",
@@ -1759,7 +1762,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 26;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 27;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1856,45 +1859,50 @@ function defaultModules(pageId){
     ] },
   ],
   ops: [
-    { id:"m_ops_0", title:"品类BSR榜", collapsed:false, links:[
-      { id:"l_ops_0_0", name:"商业照明", url:"https://www.amazon.com/gp/bestsellers/hi/5772200011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_ops_0_1", name:"泛光灯", url:"https://www.amazon.com/gp/bestsellers/hi/495238/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_ops_0_2", name:"甲板灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486437011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_ops_0_3", name:"台阶灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486439011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_ops_0_4", name:"壁灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486443011/ref=pd_zg_hrsr_hi", visits:0 },
-      { id:"l_ops_0_5", name:"房车外部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439429011/ref=pd_zg_hrsr_automotive", visits:0 },
-      { id:"l_ops_0_6", name:"房车内部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439431011/ref=pd_zg_hrsr_automotive", visits:0 },
-      { id:"l_ops_0_7", name:"地插灯", url:"https://www.amazon.com/gp/bestsellers/hi/14193171/ref=pd_zg_hrsr_hi", visits:0 },
+    { id:"m_ops_0", title:"竞品站外推广", collapsed:false, links:[
+      { id:"l_ops_0_0", name:"Tiktok", url:"https://www.tiktok.com/search?q=clip%20on%20solar%20lights&t=1793860597229", visits:0 },
+      { id:"l_ops_0_1", name:"Youtube", url:"https://www.youtube.com/results?search_query=clip+on+solar+light", visits:0 },
+      { id:"l_ops_0_2", name:"Instagram", url:"https://www.instagram.com/", visits:0 },
     ] },
-    { id:"m_ops_1", title:"品类秒杀榜", collapsed:false, links:[
-      { id:"l_ops_1_0", name:"商业照明", url:"https://www.amazon.com/b?node=5772200011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_1", name:"泛光灯", url:"https://www.amazon.com/b?node=495238&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_2", name:"甲板灯", url:"https://www.amazon.com/b?node=5486437011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_3", name:"台阶灯", url:"https://www.amazon.com/b?node=5486439011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_4", name:"壁灯", url:"https://www.amazon.com/b?node=5486443011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_5", name:"房车外部照明", url:"https://www.amazon.com/b?node=11439429011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
-      { id:"l_ops_1_6", name:"房车内部照明", url:"https://www.amazon.com/b?node=11439431011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+    { id:"m_ops_1", title:"品类BSR榜", collapsed:false, links:[
+      { id:"l_ops_1_0", name:"商业照明", url:"https://www.amazon.com/gp/bestsellers/hi/5772200011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_ops_1_1", name:"泛光灯", url:"https://www.amazon.com/gp/bestsellers/hi/495238/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_ops_1_2", name:"甲板灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486437011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_ops_1_3", name:"台阶灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486439011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_ops_1_4", name:"壁灯", url:"https://www.amazon.com/gp/bestsellers/hi/5486443011/ref=pd_zg_hrsr_hi", visits:0 },
+      { id:"l_ops_1_5", name:"房车外部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439429011/ref=pd_zg_hrsr_automotive", visits:0 },
+      { id:"l_ops_1_6", name:"房车内部照明", url:"https://www.amazon.com/gp/bestsellers/automotive/11439431011/ref=pd_zg_hrsr_automotive", visits:0 },
+      { id:"l_ops_1_7", name:"地插灯", url:"https://www.amazon.com/gp/bestsellers/hi/14193171/ref=pd_zg_hrsr_hi", visits:0 },
     ] },
-    { id:"m_ops_2", title:"工具链接", collapsed:false, links:[
-      { id:"l_ops_2_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
-      { id:"l_ops_2_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
-      { id:"l_ops_2_2", name:"八面马", url:"https://www.bamianma.com/", visits:0 },
-      { id:"l_ops_2_3", name:"SIF", url:"https://www.sif.com/", visits:0 },
-      { id:"l_ops_2_4", name:"优麦云", url:"https://www.sellerspace.com/admin/dashboard/", visits:0 },
-      { id:"l_ops_2_5", name:"AMZ123", url:"https://www.amz123.com/", visits:0 },
-      { id:"l_ops_2_6", name:"集成网址", url:"https://kjds365.cn/", visits:0 },
-      { id:"l_ops_2_7", name:"365Agent", url:"https://ai.kjds365.cn/aips-account/", visits:0 },
-      { id:"l_ops_2_8", name:"长河物流", url:"https://vip.chhto.com/vipchlogin", visits:0 },
-      { id:"l_ops_2_9", name:"直评QA", url:"https://www.amztop101.com/client/#/login", visits:0 },
-      { id:"l_ops_2_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/", visits:0 },
-      { id:"l_ops_2_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
-      { id:"l_ops_2_12", name:"滞销跟进看板", url:"https://amz-slow-dashboard.app.workbuddy.host/?sharecode=KXMXCJO5DT", visits:0 },
-      { id:"l_ops_2_13", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
-      { id:"l_ops_2_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
-      { id:"l_ops_2_15", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
-      { id:"l_ops_2_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
-      { id:"l_ops_2_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
-      { id:"l_ops_2_18", name:"链接打造表", url:"https://ycncsg8m1oyd.feishu.cn/wiki/KoHnwl4hoi0ODXk5fuZcKiCYnrc", visits:0 },
+    { id:"m_ops_2", title:"品类秒杀榜", collapsed:false, links:[
+      { id:"l_ops_2_0", name:"商业照明", url:"https://www.amazon.com/b?node=5772200011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_1", name:"泛光灯", url:"https://www.amazon.com/b?node=495238&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_2", name:"甲板灯", url:"https://www.amazon.com/b?node=5486437011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_3", name:"台阶灯", url:"https://www.amazon.com/b?node=5486439011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_4", name:"壁灯", url:"https://www.amazon.com/b?node=5486443011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_5", name:"房车外部照明", url:"https://www.amazon.com/b?node=11439429011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+      { id:"l_ops_2_6", name:"房车内部照明", url:"https://www.amazon.com/b?node=11439431011&ref_=nav_em__nav_deals_0_2_5_3", visits:0 },
+    ] },
+    { id:"m_ops_3", title:"工具链接", collapsed:false, links:[
+      { id:"l_ops_3_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
+      { id:"l_ops_3_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
+      { id:"l_ops_3_2", name:"八面马", url:"https://www.bamianma.com/", visits:0 },
+      { id:"l_ops_3_3", name:"SIF", url:"https://www.sif.com/", visits:0 },
+      { id:"l_ops_3_4", name:"优麦云", url:"https://www.sellerspace.com/admin/dashboard/", visits:0 },
+      { id:"l_ops_3_5", name:"AMZ123", url:"https://www.amz123.com/", visits:0 },
+      { id:"l_ops_3_6", name:"集成网址", url:"https://kjds365.cn/", visits:0 },
+      { id:"l_ops_3_7", name:"365Agent", url:"https://ai.kjds365.cn/aips-account/", visits:0 },
+      { id:"l_ops_3_8", name:"长河物流", url:"https://vip.chhto.com/vipchlogin", visits:0 },
+      { id:"l_ops_3_9", name:"直评QA", url:"https://www.amztop101.com/client/#/login", visits:0 },
+      { id:"l_ops_3_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_3_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
+      { id:"l_ops_3_12", name:"滞销跟进看板", url:"https://amz-slow-dashboard.app.workbuddy.host/?sharecode=KXMXCJO5DT", visits:0 },
+      { id:"l_ops_3_13", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
+      { id:"l_ops_3_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_3_15", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
+      { id:"l_ops_3_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
+      { id:"l_ops_3_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
+      { id:"l_ops_3_18", name:"链接打造表", url:"https://ycncsg8m1oyd.feishu.cn/wiki/KoHnwl4hoi0ODXk5fuZcKiCYnrc", visits:0 },
     ] },
   ],
   erp: [
