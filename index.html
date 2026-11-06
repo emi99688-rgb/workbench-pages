@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.06.1";
+const APP_VER = "2026.11.06.2";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1173,10 +1173,10 @@ const ICON_OVERRIDES = {
   "Instagram": "assets/logos/Instagram.png",
   "Facebook": "assets/logos/Facebook.png",
   "Slickdeals": "assets/logos/Slickdeals.png",
-  "Woot": "assets/logos/Woot.png",
   "Dealnews": "assets/logos/Dealnews.png",
   "Hip2save": "assets/logos/Hip2save.png",
   "Bensbargains": "assets/logos/Bensbargains.png",
+  "Woot": "assets/logos/Woot.png",
   "八面马": "assets/logos/八面马.png",
   "优麦云": "assets/logos/优麦云.png",
   "AMZ123": "assets/logos/AMZ123.png",
@@ -1768,7 +1768,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 28;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 29;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1892,10 +1892,10 @@ function defaultModules(pageId){
     ] },
     { id:"m_ops_3", title:"折扣网站", collapsed:false, links:[
       { id:"l_ops_3_0", name:"Slickdeals", url:"https://slickdeals.net/f/20162595-amazon-tuyluxe-2-pack-4000lm-solar-flood-lights-16-49-w-code", visits:0 },
-      { id:"l_ops_3_1", name:"Woot", url:"https://www.woot.com/", visits:0 },
-      { id:"l_ops_3_2", name:"Dealnews", url:"https://www.dealnews.com/", visits:0 },
-      { id:"l_ops_3_3", name:"Hip2save", url:"https://hip2save.com/", visits:0 },
-      { id:"l_ops_3_4", name:"Bensbargains", url:"https://bensbargains.com/", visits:0 },
+      { id:"l_ops_3_1", name:"Dealnews", url:"https://www.dealnews.com/", visits:0 },
+      { id:"l_ops_3_2", name:"Hip2save", url:"https://hip2save.com/", visits:0 },
+      { id:"l_ops_3_3", name:"Bensbargains", url:"https://bensbargains.com/", visits:0 },
+      { id:"l_ops_3_4", name:"Woot", url:"https://www.woot.com/", visits:0 },
     ] },
     { id:"m_ops_4", title:"工具链接", collapsed:false, links:[
       { id:"l_ops_4_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
