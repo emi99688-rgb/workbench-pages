@@ -497,8 +497,8 @@
   .bulk-bar .right { margin-left: auto; display: flex; gap: 6px; }
   .bulk-bar b { color: var(--accent); font-weight: 700; }
 
-  .tile-grid { columns: 4; column-gap: var(--gap); }
-  .tile-grid > .tile { break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid; margin: 0 0 var(--gap); width: 100%; }
+  .tile-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); align-content: start; }
+  .tile-grid > .tile { width: 100%; margin: 0; }
   .tile { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 16px 10px 12px; background: var(--tile-bg); border: 1px solid rgba(242,236,217,.05);
     border-radius: 8px; text-decoration: none; color: var(--text); text-align: center;
@@ -588,8 +588,8 @@
   .dlg .field label { font-size: 13px; color: var(--text-2); font-weight: 500; }
   .dlg .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
 
-  @media (max-width: 1080px) { .tile-grid { columns: 3; } }
-  @media (max-width: 720px)  { .tile-grid { columns: 2; } }
+  @media (max-width: 1080px) { .tile-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 720px)  { .tile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 860px) {
     body { padding: 12px; }
     .app { grid-template-columns: 1fr; height: auto; min-height: calc(100dvh - 24px - env(safe-area-inset-bottom)); }
@@ -613,7 +613,7 @@
     .kpi .kpi-num { font-size: 20px; }
   }
   @media (max-width: 480px) {
-    .tile-grid { columns: 1; }
+    .tile-grid { grid-template-columns: 1fr; }
     .tile { flex-direction: row; justify-content: flex-start; min-height: 0;
       padding: 12px 14px; text-align: left; gap: 12px; }
     .tile .ico { width: 36px; height: 36px; margin-bottom: 0; }
@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.06.2";
+const APP_VER = "2026.11.06.3";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
