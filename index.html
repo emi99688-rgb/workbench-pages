@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.06.5";
+const APP_VER = "2026.11.06.6";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1179,6 +1179,11 @@ const ICON_OVERRIDES = {
   "Woot": "assets/logos/Woot.png",
   "Zoe's Deals": "assets/logos/Zoe's Deals.png",
   "Coupera.ai": "assets/logos/Coupera.ai.png",
+  "Topone123": "assets/logos/Topone123.png",
+  "Stackinfluence": "assets/logos/Stackinfluence.png",
+  "Levanta": "assets/logos/Levanta.png",
+  "Rebaid": "assets/logos/Rebaid.jpg",
+  "亚马逊官方红人渠道": "assets/logos/亚马逊官方红人渠道.jpg",
   "八面马": "assets/logos/八面马.png",
   "优麦云": "assets/logos/优麦云.png",
   "AMZ123": "assets/logos/AMZ123.png",
@@ -1770,7 +1775,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 31;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 32;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1901,26 +1906,35 @@ function defaultModules(pageId){
       { id:"l_ops_3_5", name:"Zoe's Deals", url:"https://www.zoesdeals.com/", visits:0 },
       { id:"l_ops_3_6", name:"Coupera.ai", url:"https://www.coupera.ai/", visits:0 },
     ] },
-    { id:"m_ops_4", title:"工具链接", collapsed:false, links:[
-      { id:"l_ops_4_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
-      { id:"l_ops_4_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
-      { id:"l_ops_4_2", name:"八面马", url:"https://www.bamianma.com/", visits:0 },
-      { id:"l_ops_4_3", name:"SIF", url:"https://www.sif.com/", visits:0 },
-      { id:"l_ops_4_4", name:"优麦云", url:"https://www.sellerspace.com/admin/dashboard/", visits:0 },
-      { id:"l_ops_4_5", name:"AMZ123", url:"https://www.amz123.com/", visits:0 },
-      { id:"l_ops_4_6", name:"集成网址", url:"https://kjds365.cn/", visits:0 },
-      { id:"l_ops_4_7", name:"365Agent", url:"https://ai.kjds365.cn/aips-account/", visits:0 },
-      { id:"l_ops_4_8", name:"长河物流", url:"https://vip.chhto.com/vipchlogin", visits:0 },
-      { id:"l_ops_4_9", name:"直评QA", url:"https://www.amztop101.com/client/#/login", visits:0 },
-      { id:"l_ops_4_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/", visits:0 },
-      { id:"l_ops_4_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
-      { id:"l_ops_4_12", name:"滞销跟进看板", url:"https://amz-slow-dashboard.app.workbuddy.host/?sharecode=KXMXCJO5DT", visits:0 },
-      { id:"l_ops_4_13", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
-      { id:"l_ops_4_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
-      { id:"l_ops_4_15", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
-      { id:"l_ops_4_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
-      { id:"l_ops_4_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
-      { id:"l_ops_4_18", name:"链接打造表", url:"https://ycncsg8m1oyd.feishu.cn/wiki/KoHnwl4hoi0ODXk5fuZcKiCYnrc", visits:0 },
+    { id:"m_ops_4", title:"买家秀视频服务商", collapsed:false, links:[
+      { id:"l_ops_4_0", name:"Topone123", url:"https://www.topone123.com/#/redvideo", visits:0 },
+    ] },
+    { id:"m_ops_5", title:"站外推广服务商", collapsed:false, links:[
+      { id:"l_ops_5_0", name:"Stackinfluence", url:"https://stackinfluence.com", visits:0 },
+      { id:"l_ops_5_1", name:"Levanta", url:"https://levanta.io/pricing", visits:0 },
+      { id:"l_ops_5_2", name:"Rebaid", url:"https://www.rebaid.com/", visits:0 },
+      { id:"l_ops_5_3", name:"亚马逊官方红人渠道", url:"https://advertising.amazon.com/", visits:0 },
+    ] },
+    { id:"m_ops_6", title:"工具链接", collapsed:false, links:[
+      { id:"l_ops_6_0", name:"卖家精灵", url:"https://www.sellersprite.com/cn", visits:0 },
+      { id:"l_ops_6_1", name:"西柚洞察", url:"https://www.xydc.com/detail/asin/look_up/US/B0GQGYG7FZ", visits:0 },
+      { id:"l_ops_6_2", name:"八面马", url:"https://www.bamianma.com/", visits:0 },
+      { id:"l_ops_6_3", name:"SIF", url:"https://www.sif.com/", visits:0 },
+      { id:"l_ops_6_4", name:"优麦云", url:"https://www.sellerspace.com/admin/dashboard/", visits:0 },
+      { id:"l_ops_6_5", name:"AMZ123", url:"https://www.amz123.com/", visits:0 },
+      { id:"l_ops_6_6", name:"集成网址", url:"https://kjds365.cn/", visits:0 },
+      { id:"l_ops_6_7", name:"365Agent", url:"https://ai.kjds365.cn/aips-account/", visits:0 },
+      { id:"l_ops_6_8", name:"长河物流", url:"https://vip.chhto.com/vipchlogin", visits:0 },
+      { id:"l_ops_6_9", name:"直评QA", url:"https://www.amztop101.com/client/#/login", visits:0 },
+      { id:"l_ops_6_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_6_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
+      { id:"l_ops_6_12", name:"滞销跟进看板", url:"https://amz-slow-dashboard.app.workbuddy.host/?sharecode=KXMXCJO5DT", visits:0 },
+      { id:"l_ops_6_13", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
+      { id:"l_ops_6_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_6_15", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
+      { id:"l_ops_6_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
+      { id:"l_ops_6_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
+      { id:"l_ops_6_18", name:"链接打造表", url:"https://ycncsg8m1oyd.feishu.cn/wiki/KoHnwl4hoi0ODXk5fuZcKiCYnrc", visits:0 },
     ] },
   ],
   erp: [
