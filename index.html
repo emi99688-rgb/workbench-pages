@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.06.6";
+const APP_VER = "2026.11.06.7";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1180,6 +1180,7 @@ const ICON_OVERRIDES = {
   "Zoe's Deals": "assets/logos/Zoe's Deals.png",
   "Coupera.ai": "assets/logos/Coupera.ai.png",
   "Topone123": "assets/logos/Topone123.png",
+  "Bykol": "assets/logos/Bykol.png",
   "Stackinfluence": "assets/logos/Stackinfluence.png",
   "Levanta": "assets/logos/Levanta.png",
   "Rebaid": "assets/logos/Rebaid.jpg",
@@ -1775,7 +1776,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 32;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 33;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1908,6 +1909,7 @@ function defaultModules(pageId){
     ] },
     { id:"m_ops_4", title:"买家秀视频服务商", collapsed:false, links:[
       { id:"l_ops_4_0", name:"Topone123", url:"https://www.topone123.com/#/redvideo", visits:0 },
+      { id:"l_ops_4_1", name:"Bykol", url:"https://www.bykol.com/Videos.html?channel=AMZ123CY", visits:0 },
     ] },
     { id:"m_ops_5", title:"站外推广服务商", collapsed:false, links:[
       { id:"l_ops_5_0", name:"Stackinfluence", url:"https://stackinfluence.com", visits:0 },
