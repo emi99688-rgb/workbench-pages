@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.09.1";
+const APP_VER = "2026.11.10.1";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1201,6 +1201,7 @@ const ICON_OVERRIDES = {
   "极目": "assets/logos/极目.png",
   "H10": "assets/logos/H10.png",
   "链接打造表": "assets/logos/链接打造表.png",
+  "华海韵物流": "assets/logos/华海韵物流.png",
   "PingPong": "assets/logos/PingPong.png",
   "万里汇": "assets/logos/万里汇.png",
   "聚水潭": "assets/logos/聚水潭.png",
@@ -1777,7 +1778,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 36;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 37;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1940,6 +1941,7 @@ function defaultModules(pageId){
       { id:"l_ops_6_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
       { id:"l_ops_6_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
       { id:"l_ops_6_18", name:"链接打造表", url:"https://ycncsg8m1oyd.feishu.cn/wiki/KoHnwl4hoi0ODXk5fuZcKiCYnrc", visits:0 },
+      { id:"l_ops_6_19", name:"华海韵物流", url:"https://huahaiy.intelink.net.cn/oms/#/dashboard", visits:0 },
     ] },
   ],
   erp: [
