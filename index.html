@@ -980,7 +980,7 @@
 
 const $ = (id) => document.getElementById(id);
 /* 版本戳：改版时必须同时 bump 这里的 APP_VER 与 publish/version.json 的 ver */
-const APP_VER = "2026.11.10.1";
+const APP_VER = "2026.11.12.1";
 /* 跳过浏览器缓存重新加载（带一次性时间戳，保证拿到服务器最新版本） */
 function forceReload(){ try { location.replace(location.pathname + "?v=" + Date.now()); } catch(_){} }
 /* 自动防缓存：比对服务器 version.json 与本页内嵌版本，不一致则自动重载一次 */
@@ -1778,7 +1778,7 @@ function modCommon(root){
 /* --- 2) AMZ --- */
 /* ========== 通用「模块 → 子链接」渲染器（AMZ 等业务页复用） ========== */
 const MODS_KEY = "wb_modules";
-const MODS_VER = 37;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
+const MODS_VER = 38;   // 默认链接数据版本；默认值变动时自增，刷新即覆盖本地旧数据
 function modulesOf(pageId){ const all = load(MODS_KEY, {}); return all[pageId] && all[pageId].v === MODS_VER ? all[pageId].modules : null; }
 /* 链接总数同步：页脚「收录链接」与侧栏「数据管理」说明共用同一数据源，避免写死数字 */
 function updateLinkCounters(){
@@ -1932,11 +1932,11 @@ function defaultModules(pageId){
       { id:"l_ops_6_7", name:"365Agent", url:"https://ai.kjds365.cn/aips-account/", visits:0 },
       { id:"l_ops_6_8", name:"长河物流", url:"https://vip.chhto.com/vipchlogin", visits:0 },
       { id:"l_ops_6_9", name:"直评QA", url:"https://www.amztop101.com/client/#/login", visits:0 },
-      { id:"l_ops_6_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/", visits:0 },
-      { id:"l_ops_6_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html", visits:0 },
+      { id:"l_ops_6_10", name:"头程看板", url:"https://amz-freight-v3-43701.app.workbuddy.host/?sharecode=UDDPL6EVQ7", visits:0 },
+      { id:"l_ops_6_11", name:"补货建议看板", url:"https://fba-replenish-dashboard.app.workbuddy.host/FBA%E8%A1%A5%E8%B4%A7%E9%A2%84%E8%AD%A6%E7%9C%8B%E6%9D%BF.html?sharecode=YOMTUU2RAL", visits:0 },
       { id:"l_ops_6_12", name:"滞销跟进看板", url:"https://amz-slow-dashboard.app.workbuddy.host/?sharecode=KXMXCJO5DT", visits:0 },
       { id:"l_ops_6_13", name:"畅飞物流", url:"https://szcfsd.nextsls.com/tms/wos/home", visits:0 },
-      { id:"l_ops_6_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/", visits:0 },
+      { id:"l_ops_6_14", name:"货件跟踪", url:"https://fba-shipment-tracking.app.workbuddy.host/?sharecode=ESJ6QV2HAL", visits:0 },
       { id:"l_ops_6_15", name:"纳百万物流", url:"https://nabwan.nextsls.com/tms/wos/home", visits:0 },
       { id:"l_ops_6_16", name:"极目", url:"https://www.jiimore.com/promotion/Pr-ndj2cPtDFqMYDAbDzoADZ", visits:0 },
       { id:"l_ops_6_17", name:"H10", url:"https://i.helium10.com/c/6664989/3323618/37271", visits:0 },
@@ -1958,7 +1958,7 @@ function defaultModules(pageId){
       { id:"l_finance_0_3", name:"电子税务局", url:"https://etax.chinatax.gov.cn/", visits:0 },
     ] },
     { id:"m_finance_1", title:"全渠道利润", collapsed:false, links:[
-      { id:"l_finance_1_0", name:"利润看板", url:"https://omni-profit-dashboard.app.workbuddy.host/", visits:0 },
+      { id:"l_finance_1_0", name:"利润看板", url:"https://omni-profit-dashboard.app.workbuddy.host/?sharecode=HCRAPQOGHI", visits:0 },
     ] },
   ],
   news: [
